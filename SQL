@@ -1,0 +1,5 @@
+(1).Find Products with Valid Serial Numbers
+SELECT * 
+FROM Products 
+WHERE Description REGEXP 'SN[0-9]{4}-[0-9]{4}\\b'
+ORDER BY Product_ID;
