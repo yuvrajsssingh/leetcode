@@ -3,3 +3,8 @@ SELECT *
 FROM Products 
 WHERE Description REGEXP 'SN[0-9]{4}-[0-9]{4}\\b'
 ORDER BY Product_ID;
+
+(2). Combine Two Tables
+select p.firstName as firstName,p.lastName as lastName,
+a.city as city,a.state as state
+from person as p left join address as a on p.personId=a.personId
