@@ -8,3 +8,7 @@ ORDER BY Product_ID;
 select p.firstName as firstName,p.lastName as lastName,
 a.city as city,a.state as state
 from person as p left join address as a on p.personId=a.personId
+
+(3). Second Highest Salary
+select max(salary) as  SecondHighestSalary from employee
+where salary < (select max(salary) from employee)
