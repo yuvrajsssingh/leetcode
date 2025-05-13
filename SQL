@@ -18,3 +18,10 @@ SELECT Score,
        DENSE_RANK() OVER (ORDER BY Score DESC) AS `rank`
 FROM scores;
 
+(5).Consecutive Numbers
+SELECT DISTINCT num AS ConsecutiveNums
+FROM Logs
+WHERE 
+  num = (SELECT num FROM Logs AS l2 WHERE l2.id = Logs.id + 1) AND
+  num = (SELECT num FROM Logs AS l3 WHERE l3.id = Logs.id + 2);
+
