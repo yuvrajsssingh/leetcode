@@ -12,3 +12,9 @@ from person as p left join address as a on p.personId=a.personId
 (3). Second Highest Salary
 select max(salary) as  SecondHighestSalary from employee
 where salary < (select max(salary) from employee)
+
+(4). Rank Scores
+SELECT Score,
+       DENSE_RANK() OVER (ORDER BY Score DESC) AS `rank`
+FROM scores;
+
