@@ -25,3 +25,39 @@ WHERE
   num = (SELECT num FROM Logs AS l2 WHERE l2.id = Logs.id + 1) AND
   num = (SELECT num FROM Logs AS l3 WHERE l3.id = Logs.id + 2);
 
+(6).Employees Earning More Than Their Managers
+select e.name as 'Employee' from Employee e
+inner join Employee m on e.managerId=m.id
+where e.salary > m.salary;
+
+(7).Duplicate Emails
+select email from person
+group by email
+having count(*)>1;
+
+(8).Customers Who Never Order
+select c.name as 'Customers' from Customers as c 
+left join 
+Orders as o on c.id=o.customerId
+where o.customerId is null
+
+(9).Department Highest Salary
+WITH cte AS (
+    SELECT 
+        Employee.name AS employee_name,
+        Employee.salary,
+        Department.name AS department_name,
+        DENSE_RANK() OVER (PARTITION BY Department.name ORDER BY salary DESC) AS rk
+    FROM 
+        Employee 
+    JOIN 
+        Department 
+    ON 
+        Employee.departmentId = Department.id
+)
+SELECT 
+    department_name AS "Department",
+    employee_name AS "Employee",
+    salary AS "Salary"
+FROM cte
+WHERE rk = 1;
